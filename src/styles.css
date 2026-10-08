@@ -324,6 +324,7 @@ em {
   gap: 72px;
   padding: 52px 56px 54px;
   margin-top: 24px;
+  margin-bottom: 56px;
   background:
     radial-gradient(120% 90% at 85% -10%, #ffffffa8 0%, transparent 55%),
     linear-gradient(135deg, #f2d9e0 0%, #f7ebe1 52%, #eaead7 100%);
@@ -2251,6 +2252,7 @@ legend {
     gap: 29px;
     padding: 34px 26px 30px;
     margin-top: 14px;
+    margin-bottom: 30px;
     border-radius: 28px;
   }
   .hero-copy {
