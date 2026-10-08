@@ -322,8 +322,13 @@ em {
   grid-template-columns: 1.07fr 1fr;
   align-items: center;
   gap: 72px;
-  padding-top: 47px;
-  padding-bottom: 54px;
+  padding: 52px 56px 54px;
+  margin-top: 24px;
+  background:
+    radial-gradient(120% 90% at 85% -10%, #ffffffa8 0%, transparent 55%),
+    linear-gradient(135deg, #f2d9e0 0%, #f7ebe1 52%, #eaead7 100%);
+  border: 1px solid #eed2da;
+  border-radius: 44px;
 }
 .hero-copy {
   padding: 35px 0 0;
@@ -529,10 +534,20 @@ em {
   color: var(--rose-display);
 }
 .section-heading > p {
-  font-size: 11px;
-  line-height: 1.9;
-  color: #7e8175;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+  color: #4f5545;
   padding-bottom: 8px;
+  text-align: right;
+}
+.section-heading > p em {
+  font-family: var(--serif);
+  font-size: 21px;
+  letter-spacing: -0.3px;
+  color: var(--rose-display);
+  display: inline-block;
+  margin-top: 6px;
 }
 .menu-toolbar {
   display: flex;
@@ -1919,6 +1934,8 @@ legend {
   }
   .hero {
     gap: 40px;
+    padding-inline: 44px;
+    border-radius: 36px;
   }
   .hero h1 {
     font-size: 75px;
@@ -2232,8 +2249,9 @@ legend {
   .hero {
     grid-template-columns: 1fr;
     gap: 29px;
-    padding-top: 35px;
-    padding-bottom: 29px;
+    padding: 34px 26px 30px;
+    margin-top: 14px;
+    border-radius: 28px;
   }
   .hero-copy {
     padding-top: 0;
@@ -2346,10 +2364,15 @@ legend {
     margin-top: 11px;
   }
   .section-heading > p {
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 14px;
-    line-height: 1.8;
+    line-height: 1.7;
     padding-bottom: 0;
+    text-align: left;
+  }
+  .section-heading > p em {
+    font-size: 17px;
+    margin-top: 5px;
   }
   .menu-toolbar {
     margin-top: 23px;

@@ -755,7 +755,7 @@ export default function App() {
               <p>
                 Ton classique de demain se trouve ici.
                 <br />
-                Fais-toi plaisir, on s’occupe du reste.
+                <em>Fais-toi plaisir, on s’occupe du reste.</em>
               </p>
             </div>
             <div className="menu-toolbar">
