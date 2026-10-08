@@ -237,9 +237,24 @@ function Cart({
   if (!items.length)
     return (
       <div className="empty-cart">
-        <div className="empty-icon">
-          <ShoppingBag size={34} />
+        <div className="empty-cart-art" aria-hidden="true">
+          <img
+            src="/images/strawberry-matcha.webp"
+            alt=""
+            width="768"
+            height="512"
+          />
+          <img
+            src="/images/matcha-caramel.webp"
+            alt=""
+            width="768"
+            height="512"
+          />
+          <span>
+            <Flower />
+          </span>
         </div>
+        <p className="eyebrow">A LITTLE SIP OF HAPPINESS</p>
         <h3>
           Ton prochain crush
           <br />
@@ -269,12 +284,15 @@ function Cart({
           Ton récapitulatif est prêt. Aucune commande n’a été envoyée et aucun
           paiement n’est demandé.
         </p>
-        <textarea
-          readOnly
-          value={summary}
-          aria-label="Récapitulatif du panier"
-          rows={Math.min(12, items.length * 2 + 4)}
-        />
+        <div className="cart-review-ticket">
+          <span className="eyebrow">TIRZAH CAFÉ · TON RITUEL</span>
+          <textarea
+            readOnly
+            value={summary}
+            aria-label="Récapitulatif du panier"
+            rows={Math.min(12, items.length * 2 + 4)}
+          />
+        </div>
         <button
           className="button primary"
           onClick={async () => {
@@ -303,17 +321,42 @@ function Cart({
 
   return (
     <>
-      <p className="cart-intro">Un peu de douceur, à ta façon.</p>
+      <div className="cart-intro">
+        <span className="cart-kicker">
+          <Flower /> MATCHA, LOVE & YOU.
+        </span>
+        <p>
+          Un peu de douceur,
+          <br />
+          <em>à ta façon.</em>
+        </p>
+      </div>
       <div className="cart-items">
         {items.map((item) => {
           const product = products.find((p) => p.id === item.productId)!;
           const key = itemKey(item);
           return (
             <article className="cart-item" key={key}>
-              <img src={product.image} alt="" />
+              <div className={`cart-item-visual ${product.color}`}>
+                <img
+                  src={product.image}
+                  alt=""
+                  width="768"
+                  height="512"
+                  decoding="async"
+                />
+                <span aria-hidden="true">
+                  <Heart size={12} />
+                </span>
+              </div>
               <div className="cart-item-info">
                 <h3>{product.name}</h3>
                 <p>
+                  {item.temperature === "iced" ? (
+                    <Snowflake size={12} aria-hidden="true" />
+                  ) : (
+                    <Sun size={12} aria-hidden="true" />
+                  )}
                   {milks.find((m) => m.id === item.milk)?.label} ·{" "}
                   {item.temperature === "iced" ? "Glacé" : "Chaud"}
                 </p>
@@ -340,7 +383,10 @@ function Cart({
       </div>
       <div className="cart-bottom">
         <div className="cart-total">
-          <span>Total indicatif</span>
+          <div>
+            <span className="eyebrow">TON PETIT RITUEL</span>
+            <span>Total indicatif</span>
+          </div>
           <strong>{money(cartTotal(items))}</strong>
         </div>
         <button className="button primary" onClick={() => setReview(true)}>
@@ -1043,6 +1089,7 @@ export default function App() {
           title={`Ton panier (${count})`}
           close={() => setDialog(null)}
           drawer
+          className="cart-drawer"
         >
           <Cart
             items={cart}
