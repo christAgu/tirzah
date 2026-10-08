@@ -723,23 +723,6 @@ export default function App() {
               </div>
             </div>
           </section>
-          <div
-            className="mood-strip"
-            aria-label="Good matcha. Good mood. Good company."
-          >
-            <div>
-              {[0, 1, 2].map((n) => (
-                <span key={n} aria-hidden={n > 0}>
-                  GOOD MATCHA.
-                  <Flower />
-                  GOOD MOOD.
-                  <Flower />
-                  GOOD COMPANY.
-                  <Flower />
-                </span>
-              ))}
-            </div>
-          </div>
           <section
             className="menu-section section-container"
             id="la-carte"
