@@ -958,15 +958,10 @@ export default function App() {
               <Heart size={15} />
             </p>
           </div>
-          <div className="footer-wordmark" aria-hidden="true">
-            <img
-              src="/images/tirzah-lettering.png"
-              alt=""
-              width="540"
-              height="167"
-            />
-            <span>✳</span>
-          </div>
+          <p className="footer-wordmark">
+            let's <em>matcha</em>
+            <span aria-hidden="true">✳</span>
+          </p>
           <div className="footer-bottom section-container">
             <span>© {new Date().getFullYear()} Tirzah Café</span>
             <span>MATCHA, LOVE & GOOD COMPANY.</span>

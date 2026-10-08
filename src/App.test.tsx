@@ -18,6 +18,20 @@ beforeEach(() => {
 });
 
 describe("Tirzah app", () => {
+  it("displays the new footer slogan while keeping the café navigation", () => {
+    render(<App />);
+    const footer = screen.getByRole("contentinfo");
+    expect(footer.querySelector(".footer-wordmark")).toHaveTextContent(
+      "let's matcha",
+    );
+    expect(
+      footer.querySelector(".footer-wordmark img"),
+    ).not.toBeInTheDocument();
+    expect(
+      within(footer).getByRole("link", { name: "La carte" }),
+    ).toHaveAttribute("href", "#la-carte");
+  });
+
   it("filters the menu and persists favorites", async () => {
     const user = userEvent.setup();
     const { unmount } = render(<App />);
