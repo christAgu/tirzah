@@ -40,7 +40,7 @@ For production: validate product information and allergens, provide business/leg
 
 `npm run build` now pre-renders the home page into HTML, then React hydrates it in the browser. Crawlers can read the menu, headings and brand content without executing JavaScript. Browser-only cart/favorites load after hydration without overwriting saved data.
 
-Set `SITE_URL` to the **confirmed public HTTPS origin** (for example `https://www.example.com`) in your hosting build environment or an untracked `.env.production.local`. See `.env.example`. Do not use a Devin preview URL as the canonical domain.
+The confirmed canonical origin is **https://tirzahcafe.com/** (without `www`). The tracked `.env.production` contains public SEO settings only, so `npm run build` generates the final sitemap automatically. Never put secrets in that file: use your hosting environment or an untracked `.env.production.local`. Those settings can override `SITE_URL` and `SITE_INDEXABLE`; see `.env.example`. Do not use a Devin preview URL as the canonical domain.
 
 With `SITE_URL` configured, the production build includes:
 
@@ -49,7 +49,7 @@ With `SITE_URL` configured, the production build includes:
 - `/sitemap.xml` containing the sole canonical page. Anchors (`#la-carte`, `#notre-mood`) and interactive modals are not separate pages. No fabricated modification dates are emitted.
 - `/robots.txt` allowing crawling and referencing that sitemap.
 
-Without `SITE_URL`, or with `SITE_INDEXABLE=false`, builds carry `noindex, nofollow` and omit the sitemap. Development, Vercel preview and Netlify deploy/branch previews are also non-indexable. Crawling remains allowed so Google can read the `noindex` directive; robots.txt alone is not an indexing or access-control guarantee. Use `SITE_INDEXABLE=false` for other staging hosts. Missing or malformed public origins are not replaced by an invented domain.
+With an empty `SITE_URL` override, or with `SITE_INDEXABLE=false`, builds carry `noindex, nofollow` and omit the sitemap. Development, Vercel preview and Netlify deploy/branch previews are also non-indexable. Crawling remains allowed so Google can read the `noindex` directive; robots.txt alone is not an indexing or access-control guarantee. Use `SITE_INDEXABLE=false` for other staging hosts. Missing or malformed public origins are not replaced by an invented domain.
 
 Performance improvements include responsive WebP hero imagery, explicit image dimensions, lazy loading below the fold, compressed original photos, a single Google Fonts stylesheet with `display=swap`, high-priority hero loading and Vite's minified, hashed production bundles. No visual redesign is required.
 
