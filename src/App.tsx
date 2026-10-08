@@ -604,8 +604,10 @@ export default function App() {
               onClick={() => open({ type: "cart" })}
               aria-label={`Mon panier, ${count} article${count > 1 ? "s" : ""}`}
             >
-              <ShoppingBag size={17} />
-              <span>Mon panier</span>
+              <span className="cart-button-icon" aria-hidden="true">
+                <ShoppingBag size={18} />
+              </span>
+              <span className="cart-label">Mon panier</span>
               <span className="cart-count">{count}</span>
             </button>
             <button
