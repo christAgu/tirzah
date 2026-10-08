@@ -648,7 +648,8 @@ export default function App() {
           >
             <div className="hero-copy">
               <p className="eyebrow">
-                <span className="green-dot" /> MATCHA, LOVE & PARIS.
+                <Coffee className="eyebrow-icon" aria-hidden="true" /> MATCHA,
+                LOVE & PARIS.
               </p>
               <h1 id="hero-title">
                 Ton nouveau

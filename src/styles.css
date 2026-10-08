@@ -334,13 +334,12 @@ em {
   padding: 35px 0 0;
   position: relative;
 }
-.green-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--rose);
-  box-shadow: 0 0 0 4px var(--blush);
-  margin-right: 5px;
+.eyebrow-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--rose);
+  margin-right: 7px;
+  vertical-align: -3px;
 }
 .hero h1 {
   font-family: var(--serif);
