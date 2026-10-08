@@ -775,9 +775,13 @@ export default function App() {
                 CARTE DÉCOUVERTE · PRIX INDICATIFS
               </span>
             </div>
-            <div className="products-grid">
-              {visibleProducts.map((product) => (
-                <article className="product-card" key={product.id}>
+            <div className="products-grid" key={filter}>
+              {visibleProducts.map((product, index) => (
+                <article
+                  className="product-card"
+                  key={product.id}
+                  style={{ "--stagger": index } as React.CSSProperties}
+                >
                   <div className={`product-image ${product.color}`}>
                     <button
                       className="product-image-link"
@@ -792,6 +796,10 @@ export default function App() {
                         decoding="async"
                         loading="lazy"
                       />
+                      <span className="product-hover-cta" aria-hidden="true">
+                        Personnaliser
+                        <ArrowUpRight size={13} />
+                      </span>
                     </button>
                     <span className="product-tag">{product.tag}</span>
                     <button
@@ -825,7 +833,9 @@ export default function App() {
                           {product.name}
                         </button>
                       </h3>
-                      <span>{money(product.price)}</span>
+                      <span className="product-price">
+                        {money(product.price)}
+                      </span>
                     </div>
                     <p>{product.subtitle}</p>
                     <button
@@ -834,6 +844,7 @@ export default function App() {
                       onClick={() => open({ type: "product", product })}
                     >
                       <Plus size={20} />
+                      <span className="add-product-text">Ajouter</span>
                     </button>
                   </div>
                 </article>
