@@ -324,7 +324,6 @@ em {
   gap: 72px;
   padding: 52px 56px 54px;
   margin-top: 24px;
-  margin-bottom: 56px;
   background:
     radial-gradient(120% 90% at 85% -10%, #ffffffa8 0%, transparent 55%),
     linear-gradient(135deg, #f2d9e0 0%, #f7ebe1 52%, #eaead7 100%);
@@ -481,41 +480,8 @@ em {
   font-size: 7px;
   letter-spacing: 1.5px;
 }
-.mood-strip {
-  overflow: hidden;
-  border-block: 1px solid #e6c7d0;
-  background: var(--blush);
-  height: 63px;
-  display: flex;
-  align-items: center;
-}
-.mood-strip > div {
-  display: flex;
-  animation: marquee 45s linear infinite;
-  width: max-content;
-}
-.mood-strip span {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  gap: 35px;
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: var(--rose);
-  padding-right: 35px;
-  font-weight: 500;
-}
-.mood-strip .flower {
-  width: 25px;
-  height: 25px;
-}
-@keyframes marquee {
-  to {
-    transform: translateX(-33.3333%);
-  }
-}
 .menu-section {
-  padding-top: 91px;
+  padding-top: 52px;
   padding-bottom: 70px;
 }
 .section-heading {
@@ -2252,7 +2218,6 @@ legend {
     gap: 29px;
     padding: 34px 26px 30px;
     margin-top: 14px;
-    margin-bottom: 30px;
     border-radius: 28px;
   }
   .hero-copy {
@@ -2336,21 +2301,8 @@ legend {
     font-size: 6px;
     letter-spacing: 1.2px;
   }
-  .mood-strip {
-    height: 48px;
-  }
-  .mood-strip span {
-    gap: 21px;
-    font-size: 9px;
-    letter-spacing: 1.3px;
-    padding-right: 21px;
-  }
-  .mood-strip .flower {
-    width: 20px;
-    height: 20px;
-  }
   .menu-section {
-    padding-top: 49px;
+    padding-top: 34px;
     padding-bottom: 38px;
   }
   .section-heading {
@@ -2828,8 +2780,5 @@ legend {
   *:after {
     animation: none !important;
     transition: none !important;
-  }
-  .mood-strip > div {
-    transform: none;
   }
 }
