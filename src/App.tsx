@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   Check,
@@ -687,19 +686,6 @@ export default function App() {
                   <ArrowRight size={17} />
                 </button>
               </div>
-              <div className="hero-footnote">
-                <div className="mini-symbol">
-                  <Leaf size={20} />
-                </div>
-                <p>
-                  Plus qu’une boisson.
-                  <br />
-                  <strong>Ton petit rituel préféré.</strong>
-                </p>
-              </div>
-              <a className="scroll-hint" href="#la-carte">
-                <ArrowDown size={15} /> PRENDS UNE PAUSE, SCROLLE UN PEU
-              </a>
             </div>
             <div className="hero-visual">
               <img
