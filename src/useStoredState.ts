@@ -1,30 +1,37 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useStoredState<T>(
   key: string,
   initial: T,
   validate: (value: unknown) => value is T,
 ) {
-  const [value, setValue] = useState<T>(() => {
+  const initialValue = useRef(initial);
+  const [value, setValue] = useState<T>(initial);
+  const [loadedKey, setLoadedKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    let stored = initialValue.current;
     try {
       const raw = localStorage.getItem(key);
       if (raw !== null) {
         const parsed: unknown = JSON.parse(raw);
-        if (validate(parsed)) return parsed;
+        if (validate(parsed)) stored = parsed;
       }
     } catch {
       /* Storage may be unavailable in private browsing. */
     }
-    return initial;
-  });
+    setValue(stored);
+    setLoadedKey(key);
+  }, [key, validate]);
 
   useEffect(() => {
+    if (loadedKey !== key) return;
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch {
       /* The current session still works without persistent storage. */
     }
-  }, [key, value]);
+  }, [key, loadedKey, value]);
 
   return [value, setValue] as const;
 }

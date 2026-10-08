@@ -621,7 +621,7 @@ export default function App() {
                 </svg>
               </h1>
               <p className="hero-description">
-                Du matcha, de la douceur et des moments
+                Du matcha à Paris, de la douceur et des moments
                 <br className="desktop-break" /> qui font du bien. Bienvenue
                 chez tirzah.
               </p>
@@ -656,6 +656,11 @@ export default function App() {
               <img
                 className="hero-photo"
                 src="/images/hero-matcha.webp"
+                srcSet="/images/hero-matcha-480.webp 480w, /images/hero-matcha.webp 900w"
+                sizes="(max-width: 650px) calc(100vw - 40px), (max-width: 1150px) 45vw, 580px"
+                width="900"
+                height="1350"
+                decoding="async"
                 alt="Matcha glacé au caramel et latte gourmand, dans des gobelets Tirzah, baignés de lumière"
                 fetchPriority="high"
               />
@@ -734,6 +739,9 @@ export default function App() {
                       <img
                         src={product.image}
                         alt={product.name}
+                        width="768"
+                        height="512"
+                        decoding="async"
                         loading="lazy"
                       />
                     </button>
@@ -821,16 +829,22 @@ export default function App() {
               <div className="story-collage">
                 <div className="polaroid polaroid-one">
                   <img
-                    src="/images/original-matcha.jpg"
+                    src="/images/original-matcha.webp"
                     alt="Le matcha original Tirzah, photographié sur une table"
+                    width="768"
+                    height="1024"
+                    decoding="async"
                     loading="lazy"
                   />
                   <span>le début d’un rituel.</span>
                 </div>
                 <div className="polaroid polaroid-two">
                   <img
-                    src="/images/original-caramel.jpg"
+                    src="/images/original-caramel.webp"
                     alt="Le latte caramel original Tirzah avec sa chantilly"
+                    width="768"
+                    height="1024"
+                    decoding="async"
                     loading="lazy"
                   />
                   <span>made with love ♡</span>
