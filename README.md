@@ -27,6 +27,7 @@ npm run test:seo
 - Two-question recommendation quiz
 - Responsive navigation, accessible modal focus management, reduced-motion support
 - Original café photos plus AI-created editorial campaign images inspired by them
+- Muted, looping saffron-matcha hero clip (MP4/WebM), with pause/play, a responsive poster and no video download when reduced motion is enabled
 
 ## Before a real launch
 
@@ -51,7 +52,7 @@ With `SITE_URL` configured, the production build includes:
 
 With an empty `SITE_URL` override, or with `SITE_INDEXABLE=false`, builds carry `noindex, nofollow` and omit the sitemap. Development, Vercel preview and Netlify deploy/branch previews are also non-indexable. Crawling remains allowed so Google can read the `noindex` directive; robots.txt alone is not an indexing or access-control guarantee. Use `SITE_INDEXABLE=false` for other staging hosts. Missing or malformed public origins are not replaced by an invented domain.
 
-Performance improvements include responsive WebP hero imagery, explicit image dimensions, lazy loading below the fold, compressed original photos, a single Google Fonts stylesheet with `display=swap`, high-priority hero loading and Vite's minified, hashed production bundles. No visual redesign is required.
+Performance improvements include responsive WebP hero posters and a compressed hero video, explicit image dimensions, lazy loading below the fold, compressed original photos, a single Google Fonts stylesheet with `display=swap`, high-priority poster loading and Vite's minified, hashed production bundles. No visual redesign is required.
 
 After deployment:
 

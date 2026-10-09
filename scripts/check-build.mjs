@@ -24,6 +24,16 @@ for (const image of document.querySelectorAll("img")) {
   assert.ok(image.getAttribute("width") && image.getAttribute("height"));
   assert.ok(existsSync("dist" + image.getAttribute("src")));
 }
+const video = document.querySelector(".hero-video");
+assert.ok(video, "The saffron hero video is rendered");
+assert.ok(video.hasAttribute("muted"));
+assert.ok(video.hasAttribute("loop"));
+assert.ok(video.hasAttribute("playsinline"));
+assert.equal(video.getAttribute("preload"), "none");
+assert.ok(existsSync("dist" + video.getAttribute("poster")));
+for (const extension of ["mp4", "webm"]) {
+  assert.ok(existsSync(`dist/videos/saffron-matcha.${extension}`));
+}
 const robots = await readFile("dist/robots.txt", "utf8");
 assert.ok(robots.includes("User-agent: *\nAllow: /"));
 const canonical = document.querySelector('link[rel="canonical"]')?.href;

@@ -19,6 +19,7 @@ import {
   X,
 } from "lucide-react";
 import Modal from "./Modal";
+import HeroVideo from "./HeroVideo";
 import {
   addToCart,
   cartTotal,
@@ -712,17 +713,7 @@ export default function App() {
               </div>
             </div>
             <div className="hero-visual">
-              <img
-                className="hero-photo"
-                src="/images/hero-matcha.webp"
-                srcSet="/images/hero-matcha-480.webp 480w, /images/hero-matcha.webp 900w"
-                sizes="(max-width: 650px) calc(100vw - 40px), (max-width: 1150px) 45vw, 580px"
-                width="900"
-                height="1350"
-                decoding="async"
-                alt="Matcha glacé au caramel et latte gourmand, dans des gobelets Tirzah, baignés de lumière"
-                fetchPriority="high"
-              />
+              <HeroVideo />
               <Stamp />
               <div className="photo-note">
                 <span className="handwriting">a little sip of happiness</span>
@@ -730,7 +721,7 @@ export default function App() {
               </div>
               <div className="hero-image-caption">
                 <span>LE RITUEL TIRZAH</span>
-                <span>01 — MATCHA MOOD</span>
+                <span>SAFRAN — SPÉCIALITÉ MAISON</span>
               </div>
             </div>
           </section>
@@ -1186,9 +1177,10 @@ export default function App() {
               café.
             </p>
             <p>
-              Les visuels de campagne ont été créés à partir des photos
-              originales fournies par Tirzah. Les photos de la section « Notre
-              mood » sont les originales.
+              Les visuels de campagne et l’animation du matcha au safran sont
+              des créations de synthèse inspirées des photos fournies par
+              Tirzah. Les photos de la section « Notre mood » sont les
+              originales.
             </p>
             <p>
               Le panier ne transmet aucune commande et ne demande aucun
