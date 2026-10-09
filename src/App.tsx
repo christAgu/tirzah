@@ -423,6 +423,11 @@ function Quiz({ choose }: { choose: (product: Product) => void }) {
             name: "Team essentiel",
             desc: "Simple, doux, sans détour.",
           },
+          {
+            id: "biscuit",
+            name: "Team spéculoos",
+            desc: "Biscuit, cannelle et câlin.",
+          },
         ]
       : [
           {

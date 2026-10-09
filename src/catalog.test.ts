@@ -77,6 +77,7 @@ describe("matcha quiz", () => {
     expect(recommend("sweet", "matcha").id).toBe("matcha-caramel");
     expect(recommend("fruity", "matcha").id).toBe("strawberry-matcha");
     expect(recommend("pure", "matcha").id).toBe("matcha-classic");
+    expect(recommend("biscuit", "matcha").id).toBe("speculoos-matcha");
     expect(recommend("fruity", "coffee").id).toBe("caramel-latte");
   });
 });

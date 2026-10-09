@@ -530,7 +530,7 @@ em {
 }
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
   gap: 22px;
 }
 .product-card {
@@ -619,6 +619,9 @@ em {
 }
 .olive {
   background: #dce0c6;
+}
+.biscuit {
+  background: #ecdcc6;
 }
 .product-tag {
   position: absolute;

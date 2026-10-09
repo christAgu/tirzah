@@ -82,6 +82,21 @@ export const products: Product[] = [
     allergens:
       "Lait selon la base choisie. Composition et allergènes à confirmer au café.",
   },
+  {
+    id: "speculoos-matcha",
+    name: "Spéculoos Matcha",
+    subtitle: "Le matcha qui sent bon le goûter.",
+    description:
+      "Un matcha latte onctueux, des tourbillons de pâte de spéculoos et un crumble de biscuit croquant sur le dessus. Cannelle, douceur et green mood.",
+    category: "matcha",
+    price: 700,
+    image: "/images/speculoos-matcha.webp",
+    color: "biscuit",
+    tag: "Cozy crush",
+    temperatures: ["iced", "hot"],
+    allergens:
+      "Gluten (biscuit spéculoos) et lait selon la base choisie ; peut contenir du soja. Composition et allergènes à confirmer au café.",
+  },
 ];
 
 export const milks: { id: Milk; label: string; extra: number }[] = [
@@ -145,5 +160,6 @@ export function recommend(taste: string, mood: string) {
   if (mood === "coffee") return products[2];
   if (taste === "fruity") return products[1];
   if (taste === "pure") return products[3];
+  if (taste === "biscuit") return products[4];
   return products[0];
 }
