@@ -11,7 +11,7 @@ assert.equal(document.querySelectorAll("h1").length, 1);
 assert.equal(document.querySelectorAll("meta[name=description]").length, 1);
 assert.match(document.title, /Tirzah Café.*Matcha.*Paris/);
 assert.match(meta("description"), /matcha à Paris/);
-assert.equal(document.querySelectorAll("#root .product-card").length, 5);
+assert.equal(document.querySelectorAll("#root .product-card").length, 11);
 assert.match(document.querySelector("#root").textContent, /Caramel Matcha/);
 assert.match(document.querySelector("footer").textContent, /let's matcha/);
 assert.equal(

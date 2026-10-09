@@ -9,6 +9,7 @@ import {
   money,
   recommend,
   type CartItem,
+  milkLabel,
 } from "./catalog";
 
 const matcha: CartItem = {
@@ -73,11 +74,26 @@ describe("storage validation", () => {
 });
 
 describe("matcha quiz", () => {
+  it("skips the milk supplement and label for milk-free iced drinks", () => {
+    const lemonade = {
+      productId: "matcha-lemonade",
+      milk: "oat" as const,
+      temperature: "iced" as const,
+      quantity: 1,
+    };
+    expect(itemPrice(lemonade)).toBe(600);
+    expect(milkLabel(lemonade)).toBe("Sans lait");
+    expect(milkLabel({ productId: "mint-matcha", milk: "oat" })).toBe("Avoine");
+  });
+
   it("matches sweet, fruity, essential, and coffee moods", () => {
     expect(recommend("sweet", "matcha").id).toBe("matcha-caramel");
     expect(recommend("fruity", "matcha").id).toBe("strawberry-matcha");
     expect(recommend("pure", "matcha").id).toBe("matcha-classic");
     expect(recommend("biscuit", "matcha").id).toBe("speculoos-matcha");
     expect(recommend("fruity", "coffee").id).toBe("caramel-latte");
+    expect(recommend("fresh", "matcha").id).toBe("mint-matcha");
+    expect(recommend("spiced", "matcha").id).toBe("saffron-matcha");
+    expect(recommend("sweet", "iced").id).toBe("matcha-lemonade");
   });
 });

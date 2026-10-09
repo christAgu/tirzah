@@ -3,13 +3,14 @@ export type Product = {
   name: string;
   subtitle: string;
   description: string;
-  category: "matcha" | "coffee";
+  category: "matcha" | "coffee" | "iced";
   price: number;
   image: string;
   color: string;
   tag: string;
   temperatures: readonly Temperature[];
   allergens: string;
+  milkFree?: boolean;
 };
 
 export type Temperature = "iced" | "hot";
@@ -97,6 +98,96 @@ export const products: Product[] = [
     allergens:
       "Gluten (biscuit spéculoos) et lait selon la base choisie ; peut contenir du soja. Composition et allergènes à confirmer au café.",
   },
+  {
+    id: "mint-matcha",
+    name: "Mint Matcha",
+    subtitle: "Fraîcheur verte, version matcha.",
+    description:
+      "Un matcha latte bien frais, une touche de menthe fraîche et des glaçons. Le grand bol d’air de ta journée, en vert.",
+    category: "matcha",
+    price: 650,
+    image: "/images/mint-matcha.webp",
+    color: "mint",
+    tag: "Fresh crush",
+    temperatures: ["iced", "hot"],
+    allergens:
+      "Lait selon la base choisie. Composition et allergènes à confirmer au café.",
+  },
+  {
+    id: "vanilla-matcha",
+    name: "Vanilla Matcha",
+    subtitle: "Doux comme un câlin vanillé.",
+    description:
+      "Un matcha latte tout en rondeur, un sirop de vanille délicat et un nuage de lait. Le réconfort, en version green.",
+    category: "matcha",
+    price: 650,
+    image: "/images/vanilla-matcha.webp",
+    color: "vanilla",
+    tag: "Soft crush",
+    temperatures: ["iced", "hot"],
+    allergens:
+      "Lait selon la base choisie. Composition et allergènes à confirmer au café.",
+  },
+  {
+    id: "saffron-matcha",
+    name: "Saffron Matcha",
+    subtitle: "La spécialité de la maison.",
+    description:
+      "Notre création signature : un matcha latte infusé au safran, une note dorée et délicatement épicée, quelques pistils sur la mousse. Rare, précieux, tirzah.",
+    category: "matcha",
+    price: 800,
+    image: "/images/saffron-matcha.webp",
+    color: "saffron",
+    tag: "Spécialité maison",
+    temperatures: ["iced", "hot"],
+    allergens:
+      "Lait selon la base choisie. Composition et allergènes à confirmer au café.",
+  },
+  {
+    id: "matcha-lemonade",
+    name: "Matcha Lemonade",
+    subtitle: "Pétillant, vert, désaltérant.",
+    description:
+      "Une limonade bien fraîche, des glaçons et un voile de matcha qui flotte au-dessus. Sans lait, 100 % fraîcheur.",
+    category: "iced",
+    price: 600,
+    image: "/images/matcha-lemonade.webp",
+    color: "citrus",
+    tag: "Iced crush",
+    temperatures: ["iced"],
+    allergens: "Sans lait. Composition et allergènes à confirmer au café.",
+    milkFree: true,
+  },
+  {
+    id: "peach-iced-tea",
+    name: "Peach Iced Tea",
+    subtitle: "Le thé glacé pêche-hibiscus.",
+    description:
+      "Un thé glacé maison à la pêche, une pointe d’hibiscus et beaucoup de glaçons. L’été dans un gobelet, toute l’année.",
+    category: "iced",
+    price: 550,
+    image: "/images/peach-iced-tea.webp",
+    color: "peach",
+    tag: "Summer mood",
+    temperatures: ["iced"],
+    allergens: "Sans lait. Composition et allergènes à confirmer au café.",
+    milkFree: true,
+  },
+  {
+    id: "iced-vanilla-latte",
+    name: "Iced Vanilla Latte",
+    subtitle: "Le café glacé, version douce.",
+    description:
+      "Un café latte glacé, un sirop de vanille et un petit nuage de crème. Pour les coffee lovers qui aiment la fraîcheur.",
+    category: "iced",
+    price: 650,
+    image: "/images/iced-vanilla-latte.webp",
+    color: "cocoa",
+    tag: "Cool coffee",
+    temperatures: ["iced"],
+    allergens:
+      "Lait dans la crème, même avec une boisson végétale. Composition et allergènes à confirmer au café.",
+  },
 ];
 
 export const milks: { id: Milk; label: string; extra: number }[] = [
@@ -111,9 +202,17 @@ export const money = (cents: number) =>
   );
 export const itemKey = (item: Omit<CartItem, "quantity">) =>
   `${item.productId}:${item.milk}:${item.temperature}`;
-export const itemPrice = (item: CartItem) =>
-  (products.find((p) => p.id === item.productId)?.price ?? 0) +
-  (milks.find((m) => m.id === item.milk)?.extra ?? 0);
+export const itemPrice = (item: CartItem) => {
+  const product = products.find((p) => p.id === item.productId);
+  const extra = product?.milkFree
+    ? 0
+    : (milks.find((m) => m.id === item.milk)?.extra ?? 0);
+  return (product?.price ?? 0) + extra;
+};
+export const milkLabel = (item: Pick<CartItem, "productId" | "milk">) =>
+  products.find((p) => p.id === item.productId)?.milkFree
+    ? "Sans lait"
+    : (milks.find((m) => m.id === item.milk)?.label ?? "");
 export const cartTotal = (items: CartItem[]) =>
   items.reduce((sum, item) => sum + itemPrice(item) * item.quantity, 0);
 
@@ -156,10 +255,15 @@ export function isFavorites(value: unknown): value is string[] {
   );
 }
 
+const byId = (id: string) => products.find((p) => p.id === id) ?? products[0];
+
 export function recommend(taste: string, mood: string) {
-  if (mood === "coffee") return products[2];
-  if (taste === "fruity") return products[1];
-  if (taste === "pure") return products[3];
-  if (taste === "biscuit") return products[4];
-  return products[0];
+  if (mood === "coffee") return byId("caramel-latte");
+  if (mood === "iced") return byId("matcha-lemonade");
+  if (taste === "fruity") return byId("strawberry-matcha");
+  if (taste === "pure") return byId("matcha-classic");
+  if (taste === "biscuit") return byId("speculoos-matcha");
+  if (taste === "fresh") return byId("mint-matcha");
+  if (taste === "spiced") return byId("saffron-matcha");
+  return byId("matcha-caramel");
 }

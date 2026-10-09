@@ -530,7 +530,7 @@ em {
 }
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(205px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
   gap: 22px;
 }
 .product-card {
@@ -622,6 +622,24 @@ em {
 }
 .biscuit {
   background: #ecdcc6;
+}
+.mint {
+  background: #d7e6d4;
+}
+.vanilla {
+  background: #f0e7d6;
+}
+.saffron {
+  background: #f2dfbf;
+}
+.citrus {
+  background: #eeebc9;
+}
+.peach {
+  background: #f4dccb;
+}
+.cocoa {
+  background: #e6d9cb;
 }
 .product-tag {
   position: absolute;

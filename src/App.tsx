@@ -34,6 +34,7 @@ import {
   type Milk,
   type Product,
   type Temperature,
+  milkLabel,
 } from "./catalog";
 import { useStoredState } from "./useStoredState";
 
@@ -41,7 +42,7 @@ type Dialog =
   | { type: "product"; product: Product }
   | { type: "cart" | "quiz" | "info" | "privacy" }
   | null;
-type Filter = "all" | "matcha" | "coffee" | "favorites";
+type Filter = "all" | "matcha" | "coffee" | "iced" | "favorites";
 
 function Wordmark() {
   return (
@@ -138,28 +139,30 @@ function ProductCustomizer({
             ))}
           </div>
         </fieldset>
-        <fieldset>
-          <legend>Ton lait préféré</legend>
-          <div className="milk-options">
-            {milks.map((m) => (
-              <label
-                className={`option ${milk === m.id ? "selected" : ""}`}
-                key={m.id}
-              >
-                <input
-                  type="radio"
-                  name="milk"
-                  value={m.id}
-                  checked={milk === m.id}
-                  onChange={() => setMilk(m.id)}
-                />
-                <span>{m.label}</span>
-                <small>{m.extra ? `+ ${money(m.extra)}` : "Inclus"}</small>
-                {milk === m.id && <Check size={15} />}
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        {!product.milkFree && (
+          <fieldset>
+            <legend>Ton lait préféré</legend>
+            <div className="milk-options">
+              {milks.map((m) => (
+                <label
+                  className={`option ${milk === m.id ? "selected" : ""}`}
+                  key={m.id}
+                >
+                  <input
+                    type="radio"
+                    name="milk"
+                    value={m.id}
+                    checked={milk === m.id}
+                    onChange={() => setMilk(m.id)}
+                  />
+                  <span>{m.label}</span>
+                  <small>{m.extra ? `+ ${money(m.extra)}` : "Inclus"}</small>
+                  {milk === m.id && <Check size={15} />}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        )}
         <p className="allergen-note">{product.allergens}</p>
         <div className="customizer-bottom">
           <Quantity
@@ -228,7 +231,7 @@ function Cart({
     items
       .map(
         (item) =>
-          `${item.quantity} × ${products.find((p) => p.id === item.productId)?.name} — ${milks.find((m) => m.id === item.milk)?.label}, ${item.temperature === "iced" ? "glacé" : "chaud"} — ${money(itemPrice(item) * item.quantity)}`,
+          `${item.quantity} × ${products.find((p) => p.id === item.productId)?.name} — ${milkLabel(item)}, ${item.temperature === "iced" ? "glacé" : "chaud"} — ${money(itemPrice(item) * item.quantity)}`,
       )
       .join("\n") +
     `\nTotal indicatif : ${money(cartTotal(items))}\nTirzah Café — panier de démonstration, aucune commande envoyée.`;
@@ -356,21 +359,21 @@ function Cart({
                   ) : (
                     <Sun size={12} aria-hidden="true" />
                   )}
-                  {milks.find((m) => m.id === item.milk)?.label} ·{" "}
+                  {milkLabel(item)} ·{" "}
                   {item.temperature === "iced" ? "Glacé" : "Chaud"}
                 </p>
                 <Quantity
                   value={item.quantity}
                   minus={() => onChange(key, -1)}
                   plus={() => onChange(key, 1)}
-                  name={`${product.name}, ${milks.find((m) => m.id === item.milk)?.label}, ${item.temperature === "iced" ? "glacé" : "chaud"}`}
+                  name={`${product.name}, ${milkLabel(item)}, ${item.temperature === "iced" ? "glacé" : "chaud"}`}
                 />
               </div>
               <div className="cart-item-end">
                 <strong>{money(itemPrice(item) * item.quantity)}</strong>
                 <button
                   className="icon-button"
-                  aria-label={`Retirer ${product.name}, ${milks.find((m) => m.id === item.milk)?.label}, ${item.temperature === "iced" ? "glacé" : "chaud"}`}
+                  aria-label={`Retirer ${product.name}, ${milkLabel(item)}, ${item.temperature === "iced" ? "glacé" : "chaud"}`}
                   onClick={() => onRemove(key)}
                 >
                   <Trash2 size={16} />
@@ -428,6 +431,16 @@ function Quiz({ choose }: { choose: (product: Product) => void }) {
             name: "Team spéculoos",
             desc: "Biscuit, cannelle et câlin.",
           },
+          {
+            id: "fresh",
+            name: "Team fraîcheur",
+            desc: "Menthe, glaçons, grand bol d’air.",
+          },
+          {
+            id: "spiced",
+            name: "Team safran",
+            desc: "La spécialité maison, rare et dorée.",
+          },
         ]
       : [
           {
@@ -439,6 +452,11 @@ function Quiz({ choose }: { choose: (product: Product) => void }) {
             id: "coffee",
             name: "Coffee mood",
             desc: "Mon cœur penche pour le café.",
+          },
+          {
+            id: "iced",
+            name: "Iced mood",
+            desc: "Glaçons, fraîcheur, sans lait.",
           },
         ];
   return (
@@ -551,6 +569,7 @@ export default function App() {
     { id: "all", label: "Les signatures" },
     { id: "matcha", label: "Matcha lovers" },
     { id: "coffee", label: "Coffee lovers" },
+    { id: "iced", label: "Boissons glacées" },
     { id: "favorites", label: "Mes favoris" },
   ];
 
